@@ -6,7 +6,7 @@ The library to use Fitbit clockfaces and apps with the <a href="https://k-pay.io
 If you want to release a paid app or clockface in the Fitbit gallery, create an account on the <a href="https://k-pay.io" target="_blank">k-pay website</a> and follow the documentation. 
 Only use the k-pay lib you download from that website in your apps/clockfaces because each lib you download is uniquely adapted to work for your specific product.
 
-This open source version is only intended for developer interested in improving the library itself. Changed made and accepted here will soon be available for everyone via the k-pay website.
+This open source version is only intended for developers interested in improving the library itself. Changes made and accepted here will soon after be available for everyone via the k-pay website.
 
 # How to test
 This is a completely functional Fitbit app for the Fitbit Ionic or Versa watches. Import in Fitbit Studio (or build with the command line SDK) and run it in the simulator to test.
