@@ -78,12 +78,8 @@ function _get(id) {
   return document.getElementById(id);
 }
 
-function _showElement(el) {
-  el.style.display = 'inline';
-}
-
-function _hideElement(el) {
-  el.style.display = 'none';
+function _showElement(el, show) {
+  el.style.display = show ? 'inline' : 'none';
 }
 
 function _showPaidAppPopup() {
@@ -95,7 +91,7 @@ function _showPaidAppPopup() {
   
   //hook up buttons
   _get("btnPaidAppOk").onclick = function(evt) {
-    _hideElement(paidAppPopup);    //hide the popup
+    _showElement(paidAppPopup);    //hide the popup
   };
   _get("btnPaidAppAlreadyPaid").onclick = function(evt) {
     //get popup
@@ -103,16 +99,16 @@ function _showPaidAppPopup() {
     
     //hook up button
     _get("btnAlreadyPaidOk").onclick = function(evt) {
-      _hideElement(alreadyPaidPopup);    //hide the already paid popup
+      _showElement(alreadyPaidPopup);    //hide the already paid popup
     };
     
     //show already paid popup
-    _showElement(alreadyPaidPopup);    //show the already paid popup
-    _hideElement(paidAppPopup);    //hide the initial popup
+    _showElement(alreadyPaidPopup, true);    //show the already paid popup
+    _showElement(paidAppPopup, false);    //hide the initial popup
   };
   
   //show popup
-  _showElement(paidAppPopup);
+  _showElement(paidAppPopup, true);
 }
 
 function _handleEvent(e, data) {
@@ -154,7 +150,7 @@ function _showError(message) {
   _showTimeInDialog(); 
   
   //show error dialog
-  _showElement(_errorDialog);
+  _showElement(_errorDialog, true);
   _getUserAttention();
 }
 
@@ -173,7 +169,7 @@ function _showTrialEnded(message, code) {
   _showTimeInDialog(); 
   
   //show dialog
-  _showElement(_trialEndedDialog);
+  _showElement(_trialEndedDialog, true);
   _getUserAttention();
 }
 
@@ -187,11 +183,11 @@ function _showPurchaseSuccess() {
   _showTimeInDialog(); 
   
   //show purchase success
-  _showElement(_purchaseSuccessDialog);
+  _showElement(_purchaseSuccessDialog, true);
   
   //hide trial ended dialog
   if (_trialEndedDialog) {
-    _hideElement(_trialEndedDialog);
+    _showElement(_trialEndedDialog, false);
   }
   
   _getUserAttention("celebration-long");
@@ -207,13 +203,13 @@ function _hideAlert() {
   
   //hide the dialog
   if (_errorDialog) {
-    _hideElement(_errorDialog);
+    _showElement(_errorDialog, false);
   }
   if (_trialEndedDialog) {
-    _hideElement(_trialEndedDialog);
+    _showElement(_trialEndedDialog, false);
   }
   if (_purchaseSuccessDialog) {
-    _hideElement(_purchaseSuccessDialog);
+    _showElement(_purchaseSuccessDialog, false);
   }
 }
 
@@ -239,14 +235,14 @@ function _showTimeInDialog() {
   if (_dialogClock) {
     //show the clock
     _setDialogClockTime();
-    _showElement(_dialogClock);
+    _showElement(_dialogClock, true);
   }
 }
 
 function _hideTimeInDialog() {
   if (_dialogClock) {
     //hide the clock
-    _hideElement(_dialogClock);
+    _showElement(_dialogClock, false);
   }
 }
 
