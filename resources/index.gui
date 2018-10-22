@@ -1,0 +1,20 @@
+<svg viewport-fill="#000000">
+ 
+  <!-- BEGIN KPAY DEMO CLOCK - REPLACE WITH OWN SVG -->
+  <mask id="mask">
+    <text id="KPayDemoClock" font-size="150" font-family="Seville-Book-Condensed" text-anchor="middle" text-length="32" x="50%" y="50%+60" />
+  </mask>
+  <svg mask="#mask" width="100%" height="100%">
+    <gradientRect width="100%" height="100%"
+      gradient-type="linear"
+      gradient-x1="0" gradient-y1="50"
+      gradient-x2="0" gradient-y2="100%-50"
+      gradient-color1="#33b689" gradient-color2="#333333" />
+  </svg>
+  <!-- END KPAY DEMO CLOCK -->
+  
+  
+  
+  <!-- USE KPAY UI CODE - DO NOT MODIFY BELOW THIS LINE - ADD ALL OWN UI CODE ABOVE THIS LINE -->
+  <use href="#kpay" />
+</svg>

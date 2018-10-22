@@ -1,0 +1,126 @@
+<!--
+* K·Pay Integration Library - v1.2.6 - Copyright Kiezel 2018
+* Last Modified: 2018-09-12
+*
+* BECAUSE THE LIBRARY IS LICENSED FREE OF CHARGE, THERE IS NO
+* WARRANTY FOR THE LIBRARY, TO THE EXTENT PERMITTED BY APPLICABLE
+* LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT
+* HOLDERS AND/OR OTHER PARTIES PROVIDE THE LIBRARY "AS IS"
+* WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED,
+* INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+* MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE
+* RISK AS TO THE QUALITY AND PERFORMANCE OF THE LIBRARY IS WITH YOU.
+* SHOULD THE LIBRARY PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
+* NECESSARY SERVICING, REPAIR OR CORRECTION.
+*
+* IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN
+* WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY
+* MODIFY AND/OR REDISTRIBUTE THE LIBRARY AS PERMITTED ABOVE, BE
+* LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL,
+* INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR
+* INABILITY TO USE THE LIBRARY (INCLUDING BUT NOT LIMITED TO LOSS
+* OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY
+* YOU OR THIRD PARTIES OR A FAILURE OF THE LIBRARY TO OPERATE WITH
+* ANY OTHER SOFTWARE), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN
+* ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+-->
+
+<defs>
+  <link rel="stylesheet" href="/mnt/sysassets/widgets/dynamic_textarea.css" />
+  <link rel="import" href="/mnt/sysassets/widgets/dynamic_textarea.gui" />
+  <link rel="import" href="/mnt/sysassets/widgets/square_button_widget.gui" />
+  <link rel="import" href="/mnt/sysassets/widgets/mixed_text_widget.gui" />
+  
+  <symbol id="kpay">
+    <svg x="0" y="0" width="100%" height="100%" id="kpay_errorDialog" display="none">
+      <rect class="full-size" fill="fb-black" opacity="0.8" />
+      
+      <image x="50%-48" y="25" width="96" height="96" href="kpay/kpay_cross.png" />
+      <textarea id="kpay_errorMessage" x="5%" y="131" width="90%" font-size="26" font-family="System-Regular" fill="#ffffff" text-anchor="middle" text-length="128"></textarea>
+    </svg>
+ 
+    <svg x="0" y="0" width="100%" height="100%" id="kpay_trialEndedDialog" display="none">
+      <rect class="full-size" fill="fb-black" opacity="0.8" />
+      
+      <textarea id="kpay_trialEndedMessage" x="5%" y="18%" width="90%" font-size="26" font-family="System-Regular" fill="#ffffff" text-anchor="middle" text-length="128"></textarea>
+      <mask id="kPay_TrialEndedCodeMask">
+        <text x="50%" y="100%-25" width="100%" id="kpay_trialEndedCode" text-anchor="middle" font-size="67" fill="#ffffff" font-family="System-Bold">00000</text>
+      </mask>
+      <svg mask="#kPay_TrialEndedCodeMask" width="100%" height="100%">
+        <gradientRect x="0" width="100%" height="100%"
+          gradient-type="linear"
+          gradient-x1="0" gradient-y1="60%"
+          gradient-x2="0" gradient-y2="90%"
+          gradient-color1="#ffffff" gradient-color2="#8b8b8b" />
+      </svg>
+    </svg>
+ 
+    <svg x="0" y="0" width="100%" height="100%" id="kpay_purchaseSuccessDialog" display="none">
+      <rect class="full-size" fill="fb-black" opacity="0.8" />
+        
+      <mask id="kPay_PurchaseSuccessCircleMask">
+        <arc x="50%-73" y="23" width="146" height="146" arc-width="3" start-angle="0" sweep-angle="360" />
+      </mask>
+      <svg mask="#kPay_PurchaseSuccessCircleMask" width="100%" height="100%">
+        <gradientRect width="100%" height="100%"
+          gradient-type="linear"
+          gradient-x1="0" gradient-y1="23"
+          gradient-x2="0" gradient-y2="169"
+          gradient-color1="#3cba92" gradient-color2="#0ba360" />
+      </svg>
+      <image x="50%-41" y="67" width="82" height="64" href="kpay/kpay_check.png" />
+      <text x="50%" y="100%-40" text-anchor="middle" width="100%" font-size="30" font-family="System-Regular" fill="#ffffff">Purchase Successful!</text>
+    </svg>
+ 
+    <text x="100%-70" y="10%" width="70" id="kpay_timeInDialog" font-size="23" font-family="System-Regular" fill="#e5e5e5" display="none">00:00</text>
+    
+    <svg id="paidAppPopup" display="none">
+      <!-- Black background -->
+      <rect class="full-size" fill="fb-black" opacity="0.8" />
+
+      <!-- Text -->
+      <use id="paidAppPopupText" href="#mixed-text-center-mid" class="dialog-mixed-text" fill="fb-white">
+        <set href="#top-padding" attributeName="display" to="none" />
+        <set href="#header" attributeName="display" to="none" />
+        <set href="#copy/text" attributeName="text-buffer" to="This is a paid app. After a xx hour free trial, it requires a one-time payment of $x.xx to keep using it." />
+        <set href="#copy/text" attributeName="fill" to="#ffffff" />
+        <set href="#bottom-padding" attributeName="display" to="none" />
+      </use>
+
+      <!-- OK button -->
+      <use id="btnPaidAppOk" class="dialog-half-button-left" href="#square-button-positive">
+        <set href="#text" attributeName="text-buffer" to="Okay, got it!" />
+        <set href="#text" attributeName="text-anchor" to="middle" />
+        <set href="#text" attributeName="fill" to="#ffffff" />
+      </use>
+
+      <!-- Already paid button -->
+      <use id="btnPaidAppAlreadyPaid" class="dialog-half-button-right" href="#square-button-neutral">
+        <set href="#text" attributeName="text-buffer" to="Already paid" />
+        <set href="#text" attributeName="text-anchor" to="middle" />
+        <set href="#text" attributeName="fill" to="#ffffff" />
+      </use>
+  </svg>
+  
+  <svg id="alreadyPaidPopup" display="none">
+    <!-- Black background -->
+    <rect class="full-size" fill="fb-black" opacity="0.8" />
+
+    <!-- text -->
+    <use href="#mixed-text-center-mid" class="dialog-mixed-text" fill="fb-white">
+      <set href="#top-padding" attributeName="display" to="none" />
+      <set href="#header" attributeName="display" to="none" />
+      <set href="#copy/text" attributeName="text-buffer" to="When the app asks for payment again, use the 'Already purchased' button at the bottom of purchase page to unlock for free." />
+      <set href="#copy/text" attributeName="fill" to="#ffffff" />
+      <set href="#bottom-padding" attributeName="display" to="none" />
+    </use>
+
+    <!-- button -->
+    <use id="btnAlreadyPaidOk" class="square-button-positive" href="#square-button-positive" y="100%-70">
+      <set href="#text" attributeName="text-buffer" to="Okay, got it!" />
+      <set href="#text" attributeName="text-anchor" to="middle" />
+      <set href="#text" attributeName="fill" to="#ffffff" />
+    </use>
+  </svg>
+  </symbol>
+</defs>

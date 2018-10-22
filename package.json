@@ -1,0 +1,28 @@
+{
+  "fitbit": {
+    "appUUID": "693dcee6-9c8a-4fa8-898b-7c6c993d6ac1",
+    "appType": "app",
+    "appDisplayName": "KiezelPay",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "#009688",
+    "requestedPermissions": [
+      "access_internet"
+    ],
+    "buildTargets": [
+      "higgs",
+      "meson"
+    ],
+    "i18n": {
+      "en": {
+        "name": "KiezelPay"
+      }
+    }
+  },
+  "devDependencies": {
+    "@fitbit/sdk": "~1.0.0",
+    "@fitbit/sdk-cli": "^1.0.0"
+  },
+  "scripts": {
+    "build": "fitbit-build"
+  }
+}
