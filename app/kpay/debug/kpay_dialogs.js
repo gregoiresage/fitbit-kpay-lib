@@ -255,25 +255,14 @@ function _isErrorAlertDisplayed() {
   return _errorDialog && _errorDialog.style.display == "inline";
 }
 
-// Convert a number to a special monospaced number
-function _monoDigit(digits) {
-  var ret = "";
-  var str = digits.toString();
-  for (var index = 0; index < str.length; index++) {
-    var num = str.charAt(index);
-    ret = ret.concat(_hex2a("0x1" + num));
+// // Convert a number to a special monospaced number
+function _monoDigit(num) {
+  let monoNum = '';
+  while (num > 0) {
+    monoNum = String.fromCharCode(0x10 + (num % 10)) + monoNum;
+    num = (num / 10) | 0;
   }
-  return ret;
-}
-
-// Hex to string
-function _hex2a(hex) {
-  var str = '';
-  for (var index = 0; index < hex.length; index += 2) {
-    var val = parseInt(hex.substr(index, 2), 16);
-    if (val) str += String.fromCharCode(val);
-  }
-  return str.toString();
+  return monoNum;
 }
 
 _initkpd();
