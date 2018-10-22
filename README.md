@@ -9,4 +9,4 @@ Any contribution is welcome, please create a pull request for any changes you th
 
 We are especially looking for ways to decrease the memory usage of the lib without sacrificing functionality!
 
-Do not waste time saving memory by making filenames shorter or doing other things UglifyJS is way better at. This lib is processed with UglifyJS before it's released to the k-pay website.
+Do not waste time saving memory by making variable or function names shorter or doing other things UglifyJS is way better at. This lib is processed with UglifyJS before it's released to the k-pay website.
